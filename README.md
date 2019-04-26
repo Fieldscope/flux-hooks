@@ -1,5 +1,5 @@
 # flux-hooks
-Hooks implementation for Facebook Flux Util's Stores.
+Hooks implementation for Facebook [Flux Util](https://github.com/facebook/flux#Flux%20Utils)'s Stores.
 
 This takes advantage of the new [React Hooks API](https://reactjs.org/docs/hooks-intro.html), and is a great alternative to using Flux-Util's [Container](https://facebook.github.io/flux/docs/flux-utils.html#container).
 
