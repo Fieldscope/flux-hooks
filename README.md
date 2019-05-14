@@ -23,7 +23,7 @@ Using the [CounterStore example](https://facebook.github.io/flux/docs/flux-utils
 import useFluxStore from 'flux-hooks';
 
 const CounterComponent = () => {
-  const counter = useFluxStore(CounterStore, (prevState, store) => CounterStore.getState())
+  const counter = useFluxStore(CounterStore, (prevState, store) => store.getState())
 
   return <CounterUI counter={counter} />;
 }
