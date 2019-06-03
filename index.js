@@ -6,7 +6,7 @@ import { useEffect, useReducer } from 'react';
 
 export function useFluxStore(store, storeReducer) {
   // Call useReducer and set initial value from current state of store.
-  const [out, _dispatch] = useReducer(storeReducer, storeReducer(null, store));
+  const [out, _dispatch] = useReducer(storeReducer);
 
   useEffect(() => {
     function listener() {
@@ -16,6 +16,11 @@ export function useFluxStore(store, storeReducer) {
 
     // Attach reducer's listener to store
     const token = store.addListener(listener);
+
+    // Instead of setting initial value as the second parameter on the useReducer, dispatch here:
+    // This avoids missing an update between useReducer --> render --> useEffect
+    _dispatch(store);
+
     // On useEffect destruction, remove the listener
     return () => token.remove();
   },
