@@ -4,9 +4,11 @@ import { useEffect, useReducer } from 'react';
 // useReducer: Used to extract relevant values from the store
 // useEffect is used to attach a listener to the store
 
-export function useFluxStore(store, storeReducer) {
+export function useFluxStore(store, reducer) {
   // Call useReducer and set initial value from current state of store.
-  const [out, _dispatch] = useReducer(storeReducer);
+
+  // We need to pass reducer(null, store) as initialArg otherwise the first out will be undefined
+  const [out, _dispatch] = useReducer(reducer, reducer(null, store));
 
   useEffect(() => {
     function listener() {
