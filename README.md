@@ -13,10 +13,11 @@ This is a very simple implementation using a combination of [useEffect](https://
 
 const **value_from_store** = (**prevState**, **store**) => {...}
 
-const **value** = **useFluxStore**(**store**: \<FluxStore>, **value_from_store**: Function)
+const **value** = **useFluxStore**(**store**: \<FluxStore>, **value_from_store**: Function, *deps*)
 
-## Usage
+# Usage
 
+## Basic Usage
 Using the [CounterStore example](https://facebook.github.io/flux/docs/flux-utils.html#content) from Flux Utils. 
 
 ~~~
@@ -26,5 +27,24 @@ const CounterComponent = () => {
   const counter = useFluxStore(CounterStore, (prevState, store) => store.getState())
 
   return <CounterUI counter={counter} />;
+}
+~~~
+
+## Dependencies
+
+There are cases where the reducer is using other State/Prop values. Normally useReducer would not trigger a dispatch in this case. We use the **deps** parameter of useFluxStore as a list. 
+
+~~~
+import useFluxStore from 'flux-hooks';
+const SearchComponent = () => {
+  const [query, setQuery] = useState("")
+  const results = useFluxStore(SearchStore, (prevState, store) => store.getSearchResults(query))
+
+  return <div>
+    <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
+    <ul>
+      results.map(r => <li>{r}</li>)
+  </ul>
+  </div>
 }
 ~~~

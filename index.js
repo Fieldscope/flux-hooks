@@ -1,14 +1,17 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useMemo } from 'react';
 
 // useFluxStore essentially combines useReducer and useEffect to use with FluxStores
 // useReducer: Used to extract relevant values from the store
 // useEffect is used to attach a listener to the store
 
-export function useFluxStore(store, reducer) {
+export function useFluxStore(store, reducer, deps = []) {
   // Call useReducer and set initial value from current state of store.
 
   // We need to pass reducer(null, store) as initialArg otherwise the first out will be undefined
   const [out, _dispatch] = useReducer(reducer, reducer(null, store));
+
+  // For any dependencies in the reducer, we make sure to trigger the reducer again
+  useMemo(() => { _dispatch(store); }, deps);
 
   useEffect(() => {
     function listener() {

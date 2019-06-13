@@ -1,6 +1,6 @@
 {
   "name": "flux-hooks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hooks implementation for Facebook Flux Util's Stores",
   "main": "index.js",
   "scripts": {
