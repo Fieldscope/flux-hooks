@@ -45,7 +45,8 @@ export function useFluxStore(store, reducer, deps = [], strictEquality = false) 
     _dispatch(store);
 
     // On useEffect destruction, remove the listener
-    return token.remove;
+    // Use arrow function otherwise EventEmitter blows up
+    return () => token.remove();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   // We make sure to pass [] so we're not attaching/detaching on every render
 
