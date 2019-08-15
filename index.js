@@ -28,7 +28,7 @@ export function useFluxStore(store, reducer, deps = [], strictEquality = false) 
   // Watch dependencies, and dispatch if they change
   useMemo(() => {
     _dispatch(store);
-  }, deps); // eslint-disable-line react-hooks/exhaustive-deps
+  }, deps);
 
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export function useFluxStore(store, reducer, deps = [], strictEquality = false) 
     // On useEffect destruction, remove the listener
     // Use arrow function otherwise EventEmitter blows up
     return () => token.remove();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
   // We make sure to pass [] so we're not attaching/detaching on every render
 
   return out; // Reducer value gets returned to useFluxStore
